@@ -1,0 +1,47 @@
+{ % set version = "1.1.0" % }
+{ % set name = "edios" % }
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ..
+
+build:
+  number: 0
+  script: "python setup.py install"
+
+requirements:
+  build:
+    - python
+    - numpy
+    - scipy
+    - astropy
+    - future
+  host:
+  run:
+    - python
+    - numpy
+    - scipy
+    - astropy
+    - future
+
+test:
+  imports:
+    - edios
+
+about:
+  home: https://github.com/i4Ds/eidos.git
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: LICENSE
+  summary: 'edios - Primary beam modelling of radio astronomy antennas.'
+  description: |
+    Primary beam modelling of radio astronomy antennas.
+  doc_url: https://github.com/i4Ds/eidos.git
+  dev_url: https://github.com/i4Ds/eidos.git
+
+extra:
+  recipe-maintainers:
+    - Christoph Vögele
