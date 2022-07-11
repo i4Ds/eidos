@@ -1,35 +1,37 @@
-{ % set version = "1.1.0" % }
-{ % set name = "edios" % }
+{% set name = "eidos" %}
+{% set data = load_setup_py_data() %}
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: {{ data.get('version') }}
 
 source:
-  path: ..
+  path: .
 
 build:
+  noarch: python
   number: 0
-  script: "python setup.py install"
+  script: $PYTHON -m pip install .
 
 requirements:
   build:
-    - python
-    - numpy
+    - pip
+    - numpy>=1.17
     - scipy
     - astropy
     - future
   host:
+    - python
   run:
     - python
-    - numpy
+    - numpy>=1.17
     - scipy
     - astropy
     - future
 
 test:
   imports:
-    - edios
+    - eidos
 
 about:
   home: https://github.com/i4Ds/eidos.git
