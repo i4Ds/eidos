@@ -3,7 +3,7 @@ name: Build Conda Package Linux
 on: [ push ]
 
 env:
-  NAME_OF_PACKAGE: edios
+  NAME_OF_PACKAGE: eidos
 
 
 jobs:
