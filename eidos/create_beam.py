@@ -22,7 +22,7 @@ def zernike_parameters(filename, npix=256, diameter=10, thr=20):
     diameter_orig = 10.0  # original coeffs were calculated from 10 deg beams
     Npix = int(diameter_orig / (diameter / npix))
     params = [[Cr[:, i, :, :, :], C["zi"], Npix, thr] for i in range(Cr.shape[1])]
-    return np.array(params), C["nu"]
+    return np.array(params, dtype=np.object_), C["nu"]
 
 
 def save_fits(data, nu, args, filename):
