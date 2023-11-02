@@ -200,18 +200,22 @@ class Zernike(object):
                 else:
                     C, I = self.coeffs, self.ind
                 return np.sum(
-                    C[i]
-                    * self.zernikel(val, self.grid_rho, self.grid_phi)
-                    * self.grid_mask
-                    for (i, val) in enumerate(I)
+                    np.fromiter(
+                        C[i]
+                        * self.zernikel(val, self.grid_rho, self.grid_phi)
+                        * self.grid_mask
+                        for (i, val) in enumerate(I)
+                    )
                 )
             else:
                 self.truncate(self.thresh)
                 return np.sum(
-                    val
-                    * self.zernikel(i, self.grid_rho, self.grid_phi)
-                    * self.grid_mask
-                    for (i, val) in enumerate(self.coeffs_trunc)
+                    np.fromiter(
+                        val
+                        * self.zernikel(i, self.grid_rho, self.grid_phi)
+                        * self.grid_mask
+                        for (i, val) in enumerate(self.coeffs_trunc)
+                    )
                 )
 
         if "both" in self.mode:
