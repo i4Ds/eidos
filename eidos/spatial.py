@@ -199,29 +199,19 @@ class Zernike(object):
                     C, I = self.best_coeffs(self.coeffs, np.array(self.ind))
                 else:
                     C, I = self.coeffs, self.ind
-                return np.sum(
-                    np.fromiter(
-                        (
-                            C[i]
-                            * self.zernikel(val, self.grid_rho, self.grid_phi)
-                            * self.grid_mask
-                            for (i, val) in enumerate(I)
-                        ),
-                        dtype=C.dtype,
-                    )
+                return sum(
+                    C[i]
+                    * self.zernikel(val, self.grid_rho, self.grid_phi)
+                    * self.grid_mask
+                    for (i, val) in enumerate(I)
                 )
             else:
                 self.truncate(self.thresh)
-                return np.sum(
-                    np.fromiter(
-                        (
-                            val
-                            * self.zernikel(i, self.grid_rho, self.grid_phi)
-                            * self.grid_mask
-                            for (i, val) in enumerate(self.coeffs_trunc)
-                        )
-                    ),
-                    dtype=self.coeffs_trunc.dtype,
+                return sum(
+                    val
+                    * self.zernikel(i, self.grid_rho, self.grid_phi)
+                    * self.grid_mask
+                    for (i, val) in enumerate(self.coeffs_trunc)
                 )
 
         if "both" in self.mode:
